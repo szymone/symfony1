@@ -57,7 +57,8 @@ class sfMemcacheCache extends sfCache
                 }
             } else {
                 $method = $this->getOption('persistent', true) ? 'pconnect' : 'connect';
-                if (!$this->memcache->{$method}($this->getOption('host', 'localhost'), $this->getOption('port', 11211), $this->getOption('timeout', 1))) {
+                // NOTE: dirty hack for deprecated warning on Debian12
+                if (@ !$this->memcache->{$method}($this->getOption('host', 'localhost'), $this->getOption('port', 11211), $this->getOption('timeout', 1))) {
                     throw new sfInitializationException(sprintf('Unable to connect to the memcache server (%s:%s).', $this->getOption('host', 'localhost'), $this->getOption('port', 11211)));
                 }
             }
