@@ -117,11 +117,11 @@ class sfMemcacheCache extends sfCache
             $this->setCacheInfo($key);
         }
 
-        if (false !== $this->memcache->replace($this->getOption('prefix').$key, $data, false, time() + $lifetime)) {
+        if (false !== $this->memcache->replace($this->getOption('prefix').$key, $data, false, $lifetime)) {
             return true;
         }
 
-        return $this->memcache->set($this->getOption('prefix').$key, $data, false, time() + $lifetime);
+        return $this->memcache->set($this->getOption('prefix').$key, $data, false, $lifetime);
     }
 
     /**
@@ -231,7 +231,7 @@ class sfMemcacheCache extends sfCache
      */
     protected function setMetadata($key, $lifetime)
     {
-        $this->memcache->set($this->getOption('prefix').'_metadata'.self::SEPARATOR.$key, ['lastModified' => time(), 'timeout' => time() + $lifetime], false, time() + $lifetime);
+        $this->memcache->set($this->getOption('prefix').'_metadata'.self::SEPARATOR.$key, ['lastModified' => time(), 'timeout' => time() + $lifetime], false, $lifetime);
     }
 
     /**
