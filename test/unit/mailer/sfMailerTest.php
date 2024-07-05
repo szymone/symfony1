@@ -9,7 +9,8 @@
  */
 require_once __DIR__.'/../../bootstrap/unit.php';
 
-require_once sfConfig::get('sf_symfony_lib_dir').'/vendor/swiftmailer/lib/swift_required.php';
+require_once sfConfig::get('sf_symfony_lib_dir').'/../../../autoload.php';
+require_once sfConfig::get('sf_symfony_lib_dir').'/../../swiftmailer/lib/swift_required.php';
 
 require_once __DIR__.'/fixtures/TestMailerTransport.class.php';
 

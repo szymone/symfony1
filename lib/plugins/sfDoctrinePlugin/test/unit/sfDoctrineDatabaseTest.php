@@ -10,11 +10,15 @@
 
 include dirname(__FILE__).'/../bootstrap/unit.php';
 
-$t = new lime_test(4);
-
-class ProjectConfiguration extends sfProjectConfiguration
-{
+if (!isset($root_dir)) {
+    $root_dir = realpath(dirname(__FILE__).sprintf('/../%s/fixtures', isset($type) ? $type : 'functional'));
 }
+
+include $root_dir.'/config/ProjectConfiguration.class.php';
+$configuration = ProjectConfiguration::getApplicationConfiguration('frontend', 'test', isset($debug) ? $debug : true);
+sfContext::createInstance($configuration);
+
+$t = new lime_test(4);
 
 $configuration = new ProjectConfiguration(dirname(__FILE__).'/../../lib', new sfEventDispatcher());
 
