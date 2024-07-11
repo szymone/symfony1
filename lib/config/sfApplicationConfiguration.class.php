@@ -135,7 +135,7 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
         // the error log, then errors are displayed (display_errors is set to 1).
         if (
             !$this->isDebug()
-            || !in_array(PHP_SAPI, ['cli', 'phpdbg', 'embed'], true)
+            || !in_array(PHP_SAPI, ['cli', 'phpdbg', 'embed', 'fpm-fcgi'], true)
         ) {
             ini_set('display_errors', 0);
         } elseif (
